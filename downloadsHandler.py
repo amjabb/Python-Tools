@@ -1,3 +1,4 @@
+#!/usr/local/bin/python3
 import time
 import os  
 import sys
@@ -61,7 +62,7 @@ class HandleNames:
 			#move to 146
 			shutil.copy2(self.filePath, basePath+'/CMPE146')
 			shutil.os.remove(self.filePath)
-		elif "188" in self.filePath:
+		elif "188" in self.filePath or "ipynb" in self.filePath:
 			#move to 188
 			shutil.copy2(self.filePath, basePath+'/CMPE188')
 			shutil.os.remove(self.filePath)
