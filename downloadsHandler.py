@@ -13,10 +13,15 @@ class HandleNames:
 	def __init__(self, filePath = ''):
 		self.filePath = filePath
 
-	def nameNotEvident(self):
+	def copyFile(self, specificFilePath):
 		myFolderPath = '/Library/Mobile Documents/com~apple~CloudDocs/SJSUSPRING17'
 		basePath = os.path.expanduser("~") + myFolderPath
+		if not os.path.exists(basePath+specificFilePath):
+    			os.makedirs(basePath+specificFilePath)
+		shutil.copy2(self.filePath, basePath+specificFilePath)
+		shutil.os.remove(self.filePath)
 
+	def nameNotEvident(self):
 		print("Would you like to move the file to any of these special directories?")
 		print("Enter 0 to pass")
 		print("1. CMPE 140")
@@ -32,22 +37,17 @@ class HandleNames:
 		# 	choice = int(sys.stdin.readline().strip())
 		choice = int(input("Choice: "))
 		if choice == 1:
-			shutil.copy2(self.filePath, basePath+'/CMPE140')
-			shutil.os.remove(self.filePath)
+			self.copyFile('/CMPE140')
 		elif choice == 2:
-			shutil.copy2(self.filePath, basePath+'/CMPE146')
-			shutil.os.remove(self.filePath)
+			self.copyFile('/CMPE146')
 		elif choice == 3:
-			shutil.copy2(self.filePath, basePath+'/CMPE188')
-			shutil.os.remove(self.filePath)
+			self.copyFile('/CMPE188')
 		elif choice == 4:
-			shutil.copy2(self.filePath, basePath+'/CMPE110')
-			shutil.os.remove(self.filePath)
+			self.copyFile('/CMPE110')
 		elif choice == 5:
-			shutil.copy2(self.filePath, basePath+'/Senior Project')
-			shutil.os.remove(self.filePath)
+			self.copyFile('/SeniorProject')
 		else:
-			pass
+			self.copyFile('/UnsortedDownloads')
 
 	def nameEvident(self):
 		#edit this variable to the path of your own folders
@@ -55,25 +55,15 @@ class HandleNames:
 		basePath = os.path.expanduser("~") + myFolderPath
 
 		if "140" in self.filePath:
-			#move to 140
-			shutil.copy2(self.filePath, basePath+'/CMPE140')
-			shutil.os.remove(self.filePath)
+			self.copyFile('/CMPE140')
 		elif "146" in self.filePath:
-			#move to 146
-			shutil.copy2(self.filePath, basePath+'/CMPE146')
-			shutil.os.remove(self.filePath)
+			self.copyFile('/CMPE146')
 		elif "188" in self.filePath or "ipynb" in self.filePath:
-			#move to 188
-			shutil.copy2(self.filePath, basePath+'/CMPE188')
-			shutil.os.remove(self.filePath)
+			self.copyFile('/CMPE188')
 		elif "110" in self.filePath:
-			#move to 110
-			shutil.copy2(self.filePath, basePath+'/CMPE110')
-			shutil.os.remove(self.filePath)
+			self.copyFile('/CMPE110')
 		elif "195" in self.filePath:
-			#move to senior project
-			shutil.copy2(self.filePath, basePath+'/Senior\ Project')
-			shutil.os.remove(self.filePath)
+			self.copyFile('/SeniorProject')
 		else:
 			self.nameNotEvident()
 
