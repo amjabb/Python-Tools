@@ -7,7 +7,9 @@ Given a GitHub link this script will download a folder from Github unzip, and re
 
 Dependencies: Python, Google Chrome, chromedriver (for selenium) found here https://sites.google.com/a/chromium.org/chromedriver/
 
-Downloads Hanlder:
+Downloads Handler:
  
 Python script to watch downloads folder, as soon as a new file is added that file is added to the correct folder and removed from the downloads folder. 
 v1 File paths are hardcoded to my computer, doesn't work for folders
+
+Dependencies: Python, Watchdog(pip install watchdog)
