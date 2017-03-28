@@ -13,9 +13,13 @@ Python script to watch downloads folder, as soon as a new file is added that fil
 v1 File paths are hardcoded to my computer, doesn't work for folders
 
 TODO: 
+
 Terminal should be hidden until user input is needed.
+
 Script should run at startup.
+
 File paths should be set by user.
+
 Additional support for folders.
 
 Dependencies: Python, Watchdog(pip install watchdog)
