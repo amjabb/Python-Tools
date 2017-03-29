@@ -20,6 +20,4 @@ Script should run at startup.
 
 File paths should be set by user.
 
-Additional support for folders.
-
 Dependencies: Python, Watchdog(pip install watchdog)
