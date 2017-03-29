@@ -1,3 +1,13 @@
+'''
+    Basic python script handling github downloads
+    this script takes a github link as a parameter and
+    downloads the respective folder from the link
+    and replaces an existing folder with the same name
+'''
+
+__author__ = "Amir Jabbari"
+__version__ = '0.1'
+
 #!/usr/local/bin/python3
 import os
 import shutil
