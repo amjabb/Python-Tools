@@ -32,12 +32,25 @@ class HandleNames:
 	def copyFile(self, specificFilePath):
 
 		myFolderPath = '/Library/Mobile Documents/com~apple~CloudDocs/SJSUSPRING17'
-		basePath = os.path.expanduser("~") + myFolderPath
-		if not os.path.exists(basePath+specificFilePath):
-    			os.makedirs(basePath+specificFilePath)
-		shutil.copy2(self.filePath, basePath+specificFilePath)
-		shutil.os.remove(self.filePath)
-
+		finalFolder = os.path.expanduser("~") + myFolderPath + specificFilePath
+		if os.path.isfile(self.filePath):
+			if not os.path.exists(finalFolder):
+	    			os.makedirs(finalFolder)
+			shutil.copy2(self.filePath, finalFolder)
+			shutil.os.remove(self.filePath)
+		elif os.path.isdir(self.filePath):
+			dirName = '/' + (self.filePath.split('/'))[-1]
+			if not os.path.exists(finalFolder):
+	    			os.makedirs(finalFolder)
+			try:
+				shutil.copytree(self.filePath,finalFolder + dirName)
+			except OSError:
+				print("Folder not recognized. Leaving it there.")
+			else:
+				shutil.rmtree(self.filePath)
+		else:
+			shutil.copy2(self.filePath, finalFolder)
+			shutil.os.remove(self.filePath)
 
 	'''
 		If the directory name is not found in the file name then prompt the
