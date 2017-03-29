@@ -12,6 +12,7 @@ import time
 import os  
 import sys
 import shutil
+import zipfile
 from select import select
 
 from watchdog.observers import Observer  
@@ -33,13 +34,20 @@ class HandleNames:
 
 		myFolderPath = '/Library/Mobile Documents/com~apple~CloudDocs/SJSUSPRING17'
 		finalFolder = os.path.expanduser("~") + myFolderPath + specificFilePath
+		dirName = '/' + (self.filePath.split('/'))[-1] #name of folder only relevent if folder is added
+		if '.download' in self.filePath:
+			time.sleep(30) #This needs to be changed later
+		if '.zip' in self.filePath:
+			zipFileObject = zipfile.ZipFile(self.filePath)
+			zipFileObject.extractall(os.path.expanduser('~/Downloads/'))
+			zipFileObject.close()
+			self.filePath = os.path.expanduser('~/Downloads') + dirName
 		if os.path.isfile(self.filePath):
 			if not os.path.exists(finalFolder):
 	    			os.makedirs(finalFolder)
 			shutil.copy2(self.filePath, finalFolder)
 			shutil.os.remove(self.filePath)
 		elif os.path.isdir(self.filePath):
-			dirName = '/' + (self.filePath.split('/'))[-1]
 			if not os.path.exists(finalFolder):
 	    			os.makedirs(finalFolder)
 			try:
