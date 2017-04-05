@@ -31,12 +31,11 @@ class HandleNames:
 		@param: specificFilePath is the name of the folder to which the file is copied 
 	'''
 	def copyFile(self, specificFilePath):
-
+		print(self.filePath)
 		myFolderPath = '/Library/Mobile Documents/com~apple~CloudDocs/SJSUSPRING17'
 		finalFolder = os.path.expanduser("~") + myFolderPath + specificFilePath
 		dirName = '/' + (self.filePath.split('/'))[-1] #name of folder only relevent if folder is added
-		if '.download' in self.filePath:
-			time.sleep(30) #This needs to be changed later
+
 		if '.zip' in self.filePath:
 			zipFileObject = zipfile.ZipFile(self.filePath)
 			zipFileObject.extractall(os.path.expanduser('~/Downloads/'))
@@ -120,17 +119,19 @@ class HandleNames:
 
 class MyHandler(PatternMatchingEventHandler):
 	
-    def process(self, event):
-
-    	handle = HandleNames(event.src_path)
-    	handle.nameEvident()
-    	print("Transfer Complete")
+	newFile = False
+	def process(self, event):
+		handle = HandleNames(event.src_path)
+		handle.nameEvident()
+		print("Transfer Complete")
     	#print( event.src_path, event.event_type)  # print now only for debug
 
-    #Once a file is added to the folder process file
-    def on_created(self, event):
+	#Once a file is added to the folder process file
+	#Two on creates are issued, one for .download file and one for actual file 
+	def on_created(self, event):
+		if '.download' not in event.src_path:
+			self.process(event)
 
-        self.process(event)
 
 if __name__ == '__main__':
 
